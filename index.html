@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERUTD M THALIF - Portfolio & Sosial Media</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: brightness(0.6);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1.5rem;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff8a00, #e52e71, #9b51e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 2rem;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-item:hover .social-icon {
+            transform: scale(1.2);
+        }
+
+        .social-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Animasi untuk setiap item dengan delay bertahap */
+        .social-item:nth-child(1) { animation: fadeInUp 0.8s ease 0.2s forwards; }
+        .social-item:nth-child(2) { animation: fadeInUp 0.8s ease 0.4s forwards; }
+        .social-item:nth-child(3) { animation: fadeInUp 0.8s ease 0.6s forwards; }
+        .social-item:nth-child(4) { animation: fadeInUp 0.8s ease 0.8s forwards; }
+        .social-item:nth-child(5) { animation: fadeInUp 0.8s ease 1.0s forwards; }
+        .social-item:nth-child(6) { animation: fadeInUp 0.8s ease 1.2s forwards; }
+        .social-item:nth-child(7) { animation: fadeInUp 0.8s ease 1.4s forwards; }
+        .social-item:nth-child(8) { animation: fadeInUp 0.8s ease 1.6s forwards; }
+        .social-item:nth-child(9) { animation: fadeInUp 0.8s ease 1.8s forwards; }
+        .social-item:nth-child(10) { animation: fadeInUp 0.8s ease 2.0s forwards; }
+        .social-item:nth-child(11) { animation: fadeInUp 0.8s ease 2.2s forwards; }
+
+        /* Animasi keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .social-links {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            
+            .social-item {
+                padding: 1rem 0.5rem;
+            }
+            
+            .social-icon {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .social-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        /* Efek parallax pada scroll */
+        .parallax {
+            transform-style: preserve-3d;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="gensin.mp4" type="video/mp4">
+            Browser Anda tidak mendukung video HTML5.
+        </video>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <div class="logo-section">
+            <img src="profil_erutd.jpg" alt="ERUTD M THALIF" class="logo">
+            <h1 class="title">ERUTD M THALIF</h1>
+            <p class="subtitle">Portfolio & Hubungi Saya</p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://github.com/erutd378" target="_blank" class="social-item">
+                <i class="fab fa-github social-icon"></i>
+                <span class="social-name">GitHub</span>
+            </a>
+            <a href="https://wa.me/1234567890" target="_blank" class="social-item">
+                <i class="fab fa-whatsapp social-icon"></i>
+                <span class="social-name">WhatsApp</span>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="social-item">
+                <i class="fab fa-facebook social-icon"></i>
+                <span class="social-name">Facebook</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-item">
+                <i class="fab fa-instagram social-icon"></i>
+                <span class="social-name">Instagram</span>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-item">
+                <i class="fab fa-youtube social-icon"></i>
+                <span class="social-name">YouTube</span>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="social-item">
+                <i class="fab fa-tiktok social-icon"></i>
+                <span class="social-name">TikTok</span>
+            </a>
+            <a href="mailto:example@email.com" target="_blank" class="social-item">
+                <i class="far fa-envelope social-icon"></i>
+                <span class="social-name">Gmail</span>
+            </a>
+            <a href="https://telegram.org" target="_blank" class="social-item">
+                <i class="fab fa-telegram social-icon"></i>
+                <span class="social-name">Telegram</span>
+            </a>
+            <a href="#" class="social-item">
+                <i class="fas fa-briefcase social-icon"></i>
+                <span class="social-name">Projek</span>
+            </a>
+            <a href="#" class="social-item">
+                <i class="fas fa-images social-icon"></i>
+                <span class="social-name">Koleksi</span>
+            </a>
+            <a href="https://maps.google.com" target="_blank" class="social-item">
+                <i class="fas fa-map-marker-alt social-icon"></i>
+                <span class="social-name">Maps</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Efek parallax sederhana
+        document.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(function(el) {
+                const speed = el.getAttribute('data-speed') || 0.5;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Animasi saat elemen masuk ke viewport
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Tambahkan observer ke elemen yang ingin dianimasikan
+        document.querySelectorAll('.social-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
